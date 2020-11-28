@@ -1,1 +1,103 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #404C51;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover, a:focus {
+    text-decoration: underline;
+}
+
+a.p-button:hover,
+a.p-button:focus {
+    text-decoration: none;
+}
+
+.col-status-content a {
+    color: #495057;
+}
+
+label {
+    font-weight: bold;
+}
+
+.container {
+    margin: 0 10px;
+}
+
+@media(min-width: 1200px) {
+    .container {
+        width: 1170px;
+        margin: 0 auto;
+    }
+}
+
+@media (min-width: 40em) {
+    .col-valor-header {
+        width: 120px;
+    }
+
+    .p-datatable .p-datatable-tbody > tr > td.col-valor-content {
+        text-align: right;
+    }
+
+    .col-data-header {
+        width: 120px;
+    }
+
+    .col-data-content {
+        text-align: center;
+    }
+
+    .col-estado-header {
+        width: 100px;
+    }
+
+    .p-datatable .p-datatable-tbody > tr > td.col-estado-content {
+        text-align: center;
+    }
+
+    .col-status-header {
+        width: 100px;
+    }
+
+    .col-status-content {
+        /*width: 100px;*/
+        text-align: center;
+    }
+
+
+    .col-acoes-header {
+        width: 120px;
+    }
+
+    .col-acoes-content {
+        width: 120x;
+        text-align: center;
+    }
+}
+
+.col-acoes-content .p-button {
+    margin: 2px;
+}
+
+
+/* Customizações PrimeNG*/
+
+/*
+.p-datatable .p-datatable-thead > tr > th,
+.p-datatable .p-datatable-tbody > tr > td {
+  border-width: 1px;
+}*/
+
+
+body .ui-button:focus {
+    outline: 0 none;
+    outline-offset: 0px;
+    box-shadow: 0 0 0 0.2em #8dcdff;
+}
