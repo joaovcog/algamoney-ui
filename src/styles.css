@@ -6,6 +6,7 @@ body {
 }
 
 a {
+    color: #337ab7;
     text-decoration: none;
 }
 
@@ -100,4 +101,8 @@ body .ui-button:focus {
     outline: 0 none;
     outline-offset: 0px;
     box-shadow: 0 0 0 0.2em #8dcdff;
+}
+
+.p-button {
+    margin-right: .30em !important;
 }
