@@ -8,7 +8,13 @@ import { FormControl } from '@angular/forms';
         {{ text }}
     </div>
   `,
-  styles: [
+  styles: [`
+        .p-message-error {
+            margin: 0;
+            margin-top: 4px;
+            padding: 3px;
+        }
+      `
   ]
 })
 export class MessageComponent {
