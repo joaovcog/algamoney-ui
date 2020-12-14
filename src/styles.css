@@ -103,6 +103,6 @@ body .ui-button:focus {
     box-shadow: 0 0 0 0.2em #8dcdff;
 }
 
-.p-button {
+form .p-button {
     margin-right: .30em !important;
 }
