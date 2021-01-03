@@ -14,15 +14,14 @@ import { NgxCurrencyModule } from 'ngx-currency';
 
 import { LancamentosCadastroComponent } from './lancamentos-cadastro/lancamentos-cadastro.component';
 import { LancamentosPesquisaComponent } from './lancamentos-pesquisa/lancamentos-pesquisa.component';
-import { LancamentosGridComponent } from './lancamentos-grid/lancamentos-grid.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 
 @NgModule({
   declarations: [
       LancamentosCadastroComponent,
-      LancamentosPesquisaComponent,
-      LancamentosGridComponent
+      LancamentosPesquisaComponent
     ],
   imports: [
     CommonModule,
@@ -36,8 +35,9 @@ import { LancamentosGridComponent } from './lancamentos-grid/lancamentos-grid.co
     CalendarModule,
     SelectButtonModule,
     DropdownModule,
+    NgxCurrencyModule,
 
-    NgxCurrencyModule
+    SharedModule
   ],
   exports: [
     LancamentosCadastroComponent,

@@ -11,6 +11,7 @@ import { InputMaskModule } from 'primeng/inputmask';
 import { PessoasCadastroComponent } from './pessoas-cadastro/pessoas-cadastro.component';
 import { PessoasPesquisaComponent } from './pessoas-pesquisa/pessoas-pesquisa.component';
 import { PessoasGridComponent } from './pessoas-grid/pessoas-grid.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -28,7 +29,9 @@ import { PessoasGridComponent } from './pessoas-grid/pessoas-grid.component';
     ButtonModule,
     TableModule,
     TooltipModule,
-    InputMaskModule
+    InputMaskModule,
+
+    SharedModule
   ],
   exports: [
       PessoasCadastroComponent,
