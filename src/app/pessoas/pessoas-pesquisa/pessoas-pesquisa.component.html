@@ -1,22 +1,72 @@
 <div class="container">
     <div class="p-grid">
-        <div class="p-col-12">
-            <h1>Pessoas</h1>
-        </div>
+        <form autocomplete="off" (ngSubmit)="pesquisar()" style="width: 100%">
+            <div class="p-col-12">
+                <h1>Pessoas</h1>
+            </div>
 
-        <div class="p-col-12 p-fluid">
-            <label>Nome</label>
-            <input type="text" pInputText>
-        </div>
+            <div class="p-col-12 p-fluid">
+                <label>Nome</label>
+                <input type="text" pInputText name="nome" [(ngModel)]="filtro.nome">
+            </div>
 
-        <div class="p-col-12">
-            <button pButton type="submit" label="Pesquisar"></button>
-        </div>
+            <div class="p-col-12">
+                <button pButton type="submit" label="Pesquisar"></button>
+            </div>
+        </form>
     </div>
 
     <div class="p-grid">
         <div class="p-col-12">
-            <app-pessoas-grid [pessoas]="pessoas"></app-pessoas-grid>
+            <p-table [value]="pessoas" [paginator]="true"
+            [responsive]="true" [rows]="filtro.itensPorPagina" [lazy]="true"
+            [totalRecords]="totalRegistros" (onLazyLoad)="aoMudarPagina($event)">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Nome</th>
+                        <th>Cidade</th>
+                        <th class="col-estado-header">Estado</th>
+                        <th class="col-status-header">Status</th>
+                        <th class="col-acoes-header">Ações</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-pessoa>
+                    <tr>
+                        <td>
+                            <span class="p-column-title">Nome</span>
+                            {{pessoa.nome}}
+                        </td>
+                        <td>
+                            <span class="p-column-title">Cidade</span>
+                            {{pessoa.cidade}}
+                        </td>
+                        <td class="col-estado-content">
+                            <span class="p-column-title">Estado</span>
+                            {{pessoa.estado}}
+                        </td>
+                        <td class="col-status-content">
+                            <span class="p-column-title">Valor</span>
+                            <a href="javascript:;"
+                                [pTooltip]="pessoa.ativo ? 'Desativar' : 'Ativar'"
+                                tooltipPosition="top">
+                                {{pessoa.ativo ? 'Ativo' : 'Inativo'}}
+                            </a>
+                        </td>
+                        <td class="col-acoes-content">
+                            <a pButton class="p-button-rounded" icon="pi pi-pencil" pTooltip="Editar" tooltipPosition="top"></a>
+                            <button pButton class="p-button-rounded" icon="pi pi-trash" pTooltip="Excluir" tooltipPosition="top"></button>
+                        </td>
+                    </tr>
+                </ng-template>
+
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                      <td colspan="5">
+                        Nenhuma pessoa encontrada
+                      </td>
+                    </tr>
+                  </ng-template>
+            </p-table>
         </div>
 
         <div class="p-col-12">

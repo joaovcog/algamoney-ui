@@ -10,7 +10,6 @@ import { InputMaskModule } from 'primeng/inputmask';
 
 import { PessoasCadastroComponent } from './pessoas-cadastro/pessoas-cadastro.component';
 import { PessoasPesquisaComponent } from './pessoas-pesquisa/pessoas-pesquisa.component';
-import { PessoasGridComponent } from './pessoas-grid/pessoas-grid.component';
 import { SharedModule } from '../shared/shared.module';
 
 
@@ -18,8 +17,7 @@ import { SharedModule } from '../shared/shared.module';
 @NgModule({
   declarations: [
       PessoasCadastroComponent,
-      PessoasPesquisaComponent,
-      PessoasGridComponent
+      PessoasPesquisaComponent
   ],
   imports: [
     CommonModule,
