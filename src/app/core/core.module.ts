@@ -18,6 +18,7 @@ import { NavbarComponent } from './navbar/navbar.component';
   ],
   exports:[
       NavbarComponent,
+
       ToastModule,
       ConfirmDialogModule
   ],

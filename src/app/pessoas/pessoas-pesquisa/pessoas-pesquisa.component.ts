@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
-import { LazyLoadEvent } from 'primeng/api';
+import { ConfirmationService, LazyLoadEvent, MessageService } from 'primeng/api';
+import { Table } from 'primeng/table';
 
+import { ErrorHandlerService } from 'src/app/core/error-handler.service';
 import { PessoaFiltro, PessoaService } from '../pessoa.service';
 
 @Component({
@@ -16,7 +18,14 @@ export class PessoasPesquisaComponent {
 
     pessoas = [];
 
-    constructor(private pessoaService: PessoaService) {}
+    @ViewChild('tblPessoas') grid: Table;
+
+    constructor(
+        private pessoaService: PessoaService,
+        private messageService: MessageService,
+        private confirmation: ConfirmationService,
+        private errorHandler: ErrorHandlerService
+    ) {}
 
     pesquisar(pagina = 0) {
         this.filtro.pagina = pagina;
@@ -25,7 +34,8 @@ export class PessoasPesquisaComponent {
             .then(resultado => {
                 this.totalRegistros = resultado.total;
                 this.pessoas = resultado.pessoas;
-            });
+            })
+            .catch(erro => this.errorHandler.handle(erro));
     }
 
     aoMudarPagina(event: LazyLoadEvent) {
@@ -34,6 +44,29 @@ export class PessoasPesquisaComponent {
         if (pagina != this.filtro.pagina) {
             this.pesquisar(pagina);
         }
+    }
+
+    confirmarExclusao(pessoa: any) {
+        this.confirmation.confirm({
+            message: 'Deseja realmente excluir o registro?',
+            accept: () => {
+                this.excluir(pessoa);
+            }
+        });
+    }
+
+    excluir(pessoa: any) {
+        this.pessoaService.excluir(pessoa.codigo)
+            .then(() => {
+                if (this.grid.first === 0) {
+                    this.pesquisar();
+                } else {
+                    this.grid.reset();
+                }
+
+                this.messageService.add({ severity: 'success', detail: 'Pessoa excluída com sucesso!' });
+            })
+            .catch(erro => this.errorHandler.handle(erro));
     }
 
 }
