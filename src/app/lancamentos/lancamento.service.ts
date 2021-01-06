@@ -36,13 +36,11 @@ export class LancamentoService {
         if (filtro.dataVencimentoInicio) {
             params = params.set('dataVencimentoDe',
                         format(filtro.dataVencimentoInicio, 'yyyy-MM-dd'));
-            console.log(format(filtro.dataVencimentoInicio, 'yyyy-MM-dd'));
         }
 
         if (filtro.dataVencimentoFim) {
             params = params.set('dataVencimentoAte',
                         format(filtro.dataVencimentoFim, 'yyyy-MM-dd'));
-            console.log(format(filtro.dataVencimentoFim, 'yyyy-MM-dd'));
         }
 
 
