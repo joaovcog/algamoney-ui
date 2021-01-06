@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { format } from 'date-fns';
+import { CoreModule } from '../core/core.module';
 
 export class LancamentoFiltro {
     descricao: string;
@@ -12,7 +13,7 @@ export class LancamentoFiltro {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: CoreModule
 })
 export class LancamentoService {
 

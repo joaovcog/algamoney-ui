@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { CoreModule } from '../core/core.module';
 
 export class PessoaFiltro {
     nome: string;
@@ -8,7 +9,7 @@ export class PessoaFiltro {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: CoreModule
 })
 export class PessoaService {
 
