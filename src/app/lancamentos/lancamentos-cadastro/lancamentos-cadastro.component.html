@@ -47,13 +47,13 @@
             </div>
 
             <div class="p-col-12 p-md-6 p-fluid">
-                <label>Categoria {{ categoria.value }}</label>
+                <label>Categoria</label>
                 <p-dropdown name="categoria" [options]="categorias" [showClear]="true" placeholder="Selecione"
                     #categoria ngModel required></p-dropdown>
             </div>
 
             <div class="p-col-12 p-md-6 p-fluid">
-                <label>Pessoa {{ pessoa.value }}</label>
+                <label>Pessoa</label> <!-- {{ pessoa.value }} -->
                 <p-dropdown name="pessoa" [options]="pessoas" placeholder="Selecione"
                     [filter]="true" #pessoa ngModel required></p-dropdown>
             </div>
