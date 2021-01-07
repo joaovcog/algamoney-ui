@@ -39,17 +39,18 @@
                         </td>
                         <td>
                             <span class="p-column-title">Cidade</span>
-                            {{pessoa.cidade}}
+                            {{pessoa.endereco == null ? '' : pessoa.endereco.cidade}}
                         </td>
                         <td class="col-estado-content">
                             <span class="p-column-title">Estado</span>
-                            {{pessoa.estado}}
+                            {{pessoa.endereco == null ? '' : pessoa.endereco.estado}}
                         </td>
                         <td class="col-status-content">
                             <span class="p-column-title">Valor</span>
                             <a href="javascript:;"
                                 [pTooltip]="pessoa.ativo ? 'Desativar' : 'Ativar'"
-                                tooltipPosition="top">
+                                tooltipPosition="top" (click)="atualizarStatus(pessoa)"
+                                [ngStyle]="getEstilosAtivo(pessoa.ativo)">
                                 {{pessoa.ativo ? 'Ativo' : 'Inativo'}}
                             </a>
                         </td>

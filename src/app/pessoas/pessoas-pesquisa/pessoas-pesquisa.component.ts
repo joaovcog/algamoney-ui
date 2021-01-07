@@ -69,4 +69,30 @@ export class PessoasPesquisaComponent {
             .catch(erro => this.errorHandler.handle(erro));
     }
 
+    atualizarStatus(pessoa: any): void {
+        const novoStatus = !pessoa.ativo;
+
+        this.pessoaService.atualizarStatus(pessoa.codigo, novoStatus)
+            .then(() => {
+                const acao = novoStatus ? 'ativada' : 'desativada';
+
+                pessoa.ativo = novoStatus;
+
+                this.messageService.add({ severity: 'success', detail: `Pessoa ${acao} com sucesso!` });
+            })
+            .catch(erro => this.errorHandler.handle(erro));
+    }
+
+    private getEstilosAtivo(ativo: boolean) {
+        return {
+          color: 'white',
+          textDecoration: 'none',
+          backgroundColor: ativo ? '#5cb85c' : '#d9534f',
+          padding: '1px 10px',
+          textAlign: 'center',
+          display: 'inline-block',
+          borderRadius: '1em'
+        }
+    }
+
 }
