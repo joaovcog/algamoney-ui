@@ -1,5 +1,5 @@
 import { NgModule, LOCALE_ID } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 
 import { ToastModule } from 'primeng/toast';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
@@ -23,6 +23,7 @@ import { NavbarComponent } from './navbar/navbar.component';
       ConfirmDialogModule
   ],
   providers: [
+    DatePipe,
     { provide: LOCALE_ID, useValue: 'pt-BR' },
 
     MessageService,
