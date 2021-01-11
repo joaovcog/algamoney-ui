@@ -83,7 +83,8 @@
                         <td class="col-acoes-content">
                             <span class="p-column-title"></span>
                             <a pButton class="p-button-rounded" icon="pi pi-pencil"
-                                pTooltip="Editar" tooltipPosition="top"></a>
+                                pTooltip="Editar" tooltipPosition="top"
+                                [routerLink]="['/lancamentos', lancamento.codigo]"></a>
                             <button pButton class="p-button-rounded" icon="pi pi-trash"
                                 pTooltip="Excluir" tooltipPosition="top"
                                 (click)="confirmarExclusao(lancamento)"></button>

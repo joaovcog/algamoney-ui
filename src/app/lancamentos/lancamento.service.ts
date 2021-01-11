@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { format } from 'date-fns';
+import parse from 'date-fns/parse';
 
 import { CoreModule } from '../core/core.module';
 import { Lancamento } from '../core/model';
@@ -69,6 +70,37 @@ export class LancamentoService {
             });
     }
 
+    buscarPorCodigo(codigo: number): Promise<Lancamento> {
+        const headers = new HttpHeaders()
+            .append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+
+        return this.http.get<Lancamento>(`${this.lancamentosUrl}/${codigo}`, { headers })
+            .toPromise()
+            .then(response => {
+                const lancamento = response;
+
+                this.converterStringsParaDatas([lancamento]);
+
+                return lancamento;
+            });
+    }
+
+    atualizar(lancamento: Lancamento): Promise<Lancamento> {
+        const headers = new HttpHeaders()
+            .append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==')
+            .append('Content-Type', 'application/json');
+
+        return this.http.put<Lancamento>(`${this.lancamentosUrl}/${lancamento.codigo}`, Lancamento.toJson(lancamento), { headers })
+            .toPromise()
+            .then(response => {
+                const lancamentoAlterado = response;
+
+                this.converterStringsParaDatas([lancamentoAlterado]);
+
+                return lancamentoAlterado;
+            });
+    }
+
     excluir(codigo: number): Promise<void> {
         const headers = new HttpHeaders()
             .append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
@@ -76,5 +108,18 @@ export class LancamentoService {
         return this.http.delete(`${this.lancamentosUrl}/${codigo}`, { headers })
             .toPromise()
             .then(() => null);
+    }
+
+    private converterStringsParaDatas(lancamentos: Lancamento[]) {
+        return lancamentos.map( lancamento => {
+            return {
+                ...lancamento,
+                dataVencimento: parse(format(lancamento.dataVencimento,
+                                    'yyyy-MM-dd'), 'yyyy-MM-dd', new Date()),
+                dataPagamento: lancamento.dataPagamento ?
+                                parse(format(lancamento.dataPagamento,
+                                    'yyyy-MM-dd'), 'yyyy-MM-dd', new Date()) : null
+            };
+        });
     }
 }
