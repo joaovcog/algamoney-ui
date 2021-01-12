@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 
 import { format } from 'date-fns';
 import parse from 'date-fns/parse';
+import parseISO from 'date-fns/parseISO';
+import formatISO from 'date-fns/formatISO';
 
 import { CoreModule } from '../core/core.module';
 import { Lancamento } from '../core/model';
@@ -76,12 +78,11 @@ export class LancamentoService {
 
         return this.http.get<Lancamento>(`${this.lancamentosUrl}/${codigo}`, { headers })
             .toPromise()
-            .then(response => {
-                const lancamento = response;
-
-                this.converterStringsParaDatas([lancamento]);
-
-                return lancamento;
+            .then(lancamento => {
+                let arrayLancamentos = new Array();
+                arrayLancamentos.push(lancamento);
+                arrayLancamentos = this.converterStringsParaDatas(arrayLancamentos);
+                return arrayLancamentos[0];
             });
     }
 
@@ -92,12 +93,12 @@ export class LancamentoService {
 
         return this.http.put<Lancamento>(`${this.lancamentosUrl}/${lancamento.codigo}`, Lancamento.toJson(lancamento), { headers })
             .toPromise()
-            .then(response => {
-                const lancamentoAlterado = response;
+            .then(lancamentoAtualizado => {
+                let arrayLancamentos = new Array();
+                arrayLancamentos.push(lancamentoAtualizado);
+                arrayLancamentos = this.converterStringsParaDatas(arrayLancamentos);
 
-                this.converterStringsParaDatas([lancamentoAlterado]);
-
-                return lancamentoAlterado;
+                return arrayLancamentos[0];
             });
     }
 
@@ -110,15 +111,13 @@ export class LancamentoService {
             .then(() => null);
     }
 
-    private converterStringsParaDatas(lancamentos: Lancamento[]) {
+    private converterStringsParaDatas(lancamentos: Array<Lancamento>) {
         return lancamentos.map( lancamento => {
             return {
-                ...lancamento,
-                dataVencimento: parse(format(lancamento.dataVencimento,
-                                    'yyyy-MM-dd'), 'yyyy-MM-dd', new Date()),
-                dataPagamento: lancamento.dataPagamento ?
-                                parse(format(lancamento.dataPagamento,
-                                    'yyyy-MM-dd'), 'yyyy-MM-dd', new Date()) : null
+            ...lancamento,
+            dataVencimento: parse(lancamento.dataVencimento.toLocaleString(), 'yyyy-MM-dd', new Date()),
+            dataPagamento: lancamento.dataPagamento ?
+                           parse(lancamento.dataPagamento.toLocaleString(), 'yyyy-MM-dd', new Date()) : null
             };
         });
     }
