@@ -112,7 +112,7 @@ export class LancamentoService {
     }
 
     private converterStringsParaDatas(lancamentos: Array<Lancamento>) {
-        return lancamentos.map( lancamento => {
+        return lancamentos.map(lancamento => {
             return {
             ...lancamento,
             dataVencimento: parse(lancamento.dataVencimento.toLocaleString(), 'yyyy-MM-dd', new Date()),

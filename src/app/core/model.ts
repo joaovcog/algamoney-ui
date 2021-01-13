@@ -36,7 +36,8 @@ export class Lancamento {
         return {
             ...lancamento,
             dataVencimento: format(lancamento.dataVencimento, 'yyyy-MM-dd'),
-            dataPagamento: format(lancamento.dataPagamento, 'yyyy-MM-dd'),
+            dataPagamento: lancamento.dataPagamento ?
+                            format(lancamento.dataPagamento, 'yyyy-MM-dd') : null,
         }
     }
 }
