@@ -39,6 +39,11 @@ export class LancamentosCadastroComponent implements OnInit {
     ngOnInit(): void {
         const codLancamento = this.route.snapshot.params['codigo'];
         if (codLancamento) {
+            if(isNaN(codLancamento)) {
+                this.router.navigate(['/lancamentos', 'novo']);
+                return;
+            }
+
             this.carregarLancamento(codLancamento);
         }
 
