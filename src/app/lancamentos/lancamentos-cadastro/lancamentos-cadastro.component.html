@@ -70,7 +70,8 @@
 
             <div class="p-col-12">
                 <button pButton type="submit" label="Salvar" [disabled]="!cadLancamentoForm.valid"></button>
-                <button pButton type="button" label="Novo" class="p-button-secondary"></button>
+                <button pButton type="button" label="Novo" class="p-button-secondary"
+                    (click)="novo(cadLancamentoForm)"></button>
                 <a routerLink="/lancamentos" style="line-height: 2.2em; margin-left: 5px">Voltar para a pesquisa</a>
             </div>
 
