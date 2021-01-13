@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 import { CategoriaService } from 'src/app/categorias/categoria.service';
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
@@ -33,11 +34,15 @@ export class LancamentosCadastroComponent implements OnInit {
         private messageService: MessageService,
         private errorHandler: ErrorHandlerService,
         private route: ActivatedRoute,
-        private router: Router
+        private router: Router,
+        private title: Title
     ) { }
 
     ngOnInit(): void {
+        this.title.setTitle('Novo Lançamento');
+
         const codLancamento = this.route.snapshot.params['codigo'];
+
         if (codLancamento) {
             if(isNaN(codLancamento)) {
                 this.router.navigate(['/lancamentos', 'novo']);
@@ -59,6 +64,7 @@ export class LancamentosCadastroComponent implements OnInit {
         this.lancamentoService.buscarPorCodigo(codigo)
             .then(lancamento => {
                 this.lancamento = lancamento;
+                this.atualizarTituloEdicao();
             })
             .catch(erro => this.errorHandler.handle(erro));
     }
@@ -97,6 +103,7 @@ export class LancamentosCadastroComponent implements OnInit {
                 this.lancamento = lancamento;
 
                 this.messageService.add({ severity: 'success', detail: 'Lançamento alterado com sucesso' });
+                this.atualizarTituloEdicao();
             })
             .catch(erro => this.errorHandler.handle(erro));
     }
@@ -118,5 +125,9 @@ export class LancamentosCadastroComponent implements OnInit {
                     .map(p => ({ label: p.nome, value: p.codigo }));
             })
             .catch(erro => this.errorHandler.handle(erro));
+    }
+
+    atualizarTituloEdicao() {
+        this.title.setTitle(`Edição de lançamento: ${this.lancamento.descricao}`);
     }
 }

@@ -1,6 +1,7 @@
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 import { ToastModule } from 'primeng/toast';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
@@ -30,7 +31,8 @@ import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada.component'
     { provide: LOCALE_ID, useValue: 'pt-BR' },
 
     MessageService,
-    ConfirmationService
+    ConfirmationService,
+    Title
   ]
 })
 export class CoreModule { }
