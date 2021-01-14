@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CoreModule } from './core.module';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 import { MessageService } from 'primeng/api';
 
@@ -9,7 +10,8 @@ import { MessageService } from 'primeng/api';
 })
 export class ErrorHandlerService {
 
-    constructor(private messageService: MessageService) { }
+    constructor(private messageService: MessageService,
+        private router: Router) { }
 
     handle(errorResponse: any) {
         let msg: string;
@@ -18,6 +20,11 @@ export class ErrorHandlerService {
             msg = errorResponse;
         } else if (errorResponse instanceof HttpErrorResponse &&
                     errorResponse.status >= 400 && errorResponse.status <= 499) {
+            if (errorResponse.status == 404) {
+                this.router.navigate(['/pagina-nao-encontrada']);
+                return;
+            }
+
             msg = 'Ocorreu um erro ao processar a sua solicitação';
 
             try {
