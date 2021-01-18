@@ -55,9 +55,8 @@ export class PessoasCadastroComponent implements OnInit {
             .catch(erro => this.errorHandler.handle(erro));
     }
 
-    novo(form: FormControl) {
-        this.pessoa = new Pessoa();
-        form.reset(this.pessoa);
+    nova(form: FormControl) {
+        form.reset(new Pessoa());
 
         this.router.navigate(['/pessoas', 'nova']);
     }
