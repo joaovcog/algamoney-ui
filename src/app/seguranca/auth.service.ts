@@ -5,9 +5,7 @@ import { JwtHelperService } from "@auth0/angular-jwt";
 
 import { CoreModule } from '../core/core.module';
 
-@Injectable({
-  providedIn: CoreModule
-})
+@Injectable()
 export class AuthService {
 
     oauthTokenUrl = 'http://localhost:8080/oauth/token';

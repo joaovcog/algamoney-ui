@@ -31,7 +31,7 @@ registerLocaleData(localePt);
       ConfirmDialogModule
   ],
   providers: [
-    //AuthService,
+    AuthService,
 
     MessageService,
     ConfirmationService,
