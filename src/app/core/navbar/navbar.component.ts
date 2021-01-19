@@ -16,6 +16,6 @@ export class NavbarComponent implements OnInit {
     }
 
     get nomeUsuario() {
-        return this.auth.jwtPayload.nome;
+        return this.auth.jwtPayload?.nome;
     }
 }
