@@ -12,10 +12,7 @@ export class CategoriaService {
     constructor(private http: HttpClient) { }
 
     listarTodas(): Promise<any> {
-        const headers = new HttpHeaders()
-            .append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
-
-        return this.http.get(this.categoriasUrl, { headers })
+        return this.http.get(this.categoriasUrl)
             .toPromise();
             //.then(response => response['content']);
     }
