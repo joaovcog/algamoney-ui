@@ -9,13 +9,19 @@ import { AuthService } from '../auth.service';
   templateUrl: './login-form.component.html',
   styleUrls: ['./login-form.component.css']
 })
-export class LoginFormComponent {
+export class LoginFormComponent implements OnInit {
 
     constructor(
         private auth: AuthService,
         private errorHandler: ErrorHandlerService,
         private router: Router
     ) { }
+
+    ngOnInit(): void {
+        if (!this.auth.isAccessTokenInvalido()) {
+            this.router.navigate(['/lancamentos']);
+        }
+    }
 
     login(usuario: string, senha: string) {
         this.auth.login(usuario, senha)
