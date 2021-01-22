@@ -7,6 +7,11 @@
     color: #fff;
 }
 
+.navbar-close {
+    color: #fff;
+    float: right;
+}
+
 .navbar-menu {
     position: fixed;
     top: 0;
