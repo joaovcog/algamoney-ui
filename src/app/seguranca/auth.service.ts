@@ -9,6 +9,7 @@ import { CoreModule } from '../core/core.module';
 export class AuthService {
 
     oauthTokenUrl = 'http://localhost:8080/oauth/token';
+    tokensRevokeUrl = 'http://localhost:8080/tokens/revoke';
     jwtPayload: any;
 
     constructor(
@@ -39,6 +40,19 @@ export class AuthService {
             });
     }
 
+    logout() {
+        return this.http.delete(this.tokensRevokeUrl, { withCredentials: true })
+            .toPromise()
+            .then(() => {
+                this.limparAccessToken();
+            });
+    }
+
+    limparAccessToken() {
+        localStorage.removeItem('token');
+        this.jwtPayload = null;
+    }
+
     obterNovoAccessToken(): Promise<void> {
         const headers = new HttpHeaders()
             .append('Content-Type', 'application/x-www-form-urlencoded')
@@ -50,12 +64,10 @@ export class AuthService {
             .toPromise()
             .then(response => {
                 this.armazenarToken(response['access_token']);
-                console.log('Novo access token criado!');
 
                 return Promise.resolve(null);
             })
             .catch(response => {
-                console.error('Erro ao renovar token.', response);
                 return Promise.resolve(null);
             });
     }

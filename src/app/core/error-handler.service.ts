@@ -6,9 +6,7 @@ import { CoreModule } from './core.module';
 import { MessageService } from 'primeng/api';
 import { NotAuthenticatedError } from '../seguranca/money-http-interceptor';
 
-@Injectable({
-  providedIn: CoreModule
-})
+@Injectable()
 export class ErrorHandlerService {
 
     constructor(private messageService: MessageService,

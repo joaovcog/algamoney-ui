@@ -13,6 +13,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada.component';
 import { AuthService } from '../seguranca/auth.service';
 import { NaoAutorizadoComponent } from './nao-autorizado.component';
+import { ErrorHandlerService } from './error-handler.service';
 
 
 registerLocaleData(localePt);
@@ -33,6 +34,7 @@ registerLocaleData(localePt);
       ConfirmDialogModule
   ],
   providers: [
+    ErrorHandlerService,
     AuthService,
 
     MessageService,
