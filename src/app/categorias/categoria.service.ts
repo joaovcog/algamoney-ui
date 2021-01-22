@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 import { CoreModule } from '../core/core.module';
 
 @Injectable({
@@ -7,9 +8,11 @@ import { CoreModule } from '../core/core.module';
 })
 export class CategoriaService {
 
-    categoriasUrl = 'http://localhost:8080/categorias';
+    categoriasUrl: string;
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient) {
+        this.categoriasUrl = `${environment.apiUrl}/categorias`;
+    }
 
     listarTodas(): Promise<any> {
         return this.http.get(this.categoriasUrl)

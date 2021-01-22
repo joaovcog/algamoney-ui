@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 
 import { format } from 'date-fns';
 import parse from 'date-fns/parse';
+import { environment } from 'src/environments/environment';
 
 import { CoreModule } from '../core/core.module';
 import { Lancamento } from '../core/model';
@@ -20,9 +21,11 @@ export class LancamentoFiltro {
 })
 export class LancamentoService {
 
-    lancamentosUrl = 'http://localhost:8080/lancamentos';
+    lancamentosUrl: string;
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient) {
+        this.lancamentosUrl = `${environment.apiUrl}/lancamentos`;
+    }
 
     adicionar(lancamento: Lancamento): Promise<Lancamento> {
         return this.http.post<Lancamento>(this.lancamentosUrl, Lancamento.toJson(lancamento))
