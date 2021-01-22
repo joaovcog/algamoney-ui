@@ -17,7 +17,6 @@ export class MoneyHttpInterceptor implements HttpInterceptor {
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         if (!req.url.includes('/oauth/token') && this.auth.isAccessTokenInvalido()) {
-            console.log('Access Token inválido. Obtendo novo token...');
             return from(this.auth.obterNovoAccessToken())
                 .pipe(
                     mergeMap(() => {
