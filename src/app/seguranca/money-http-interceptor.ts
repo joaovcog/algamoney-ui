@@ -33,7 +33,7 @@ export class MoneyHttpInterceptor implements HttpInterceptor {
 
     private doRequestWithToken(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         const token = localStorage.getItem('token');
-
+        console.log('token', token);
         req = req.clone({
             setHeaders: {
                 Accept: `application/json`,
