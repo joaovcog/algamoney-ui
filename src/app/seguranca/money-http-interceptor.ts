@@ -21,6 +21,7 @@ export class MoneyHttpInterceptor implements HttpInterceptor {
         }
 
         if (this.auth.isAccessTokenInvalido()) {
+            console.log('token inválido!');
             return this.doRequestRefreshToken(req, next);
         }
 
