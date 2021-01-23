@@ -11,6 +11,7 @@ import { SegurancaRoutingModule } from './seguranca-routing.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MoneyHttpInterceptor } from './money-http-interceptor';
 import { AuthGuard } from './auth.guard';
+import { environment } from 'src/environments/environment';
 
 export function tokenGetter(): string {
     return localStorage.getItem('token');
@@ -28,8 +29,8 @@ export function tokenGetter(): string {
     JwtModule.forRoot({
         config: {
             tokenGetter,
-            allowedDomains: ['localhost:8080'],
-            disallowedRoutes: ['http://localhost:8080/oauth/token']
+            allowedDomains: environment.tokenAllowedDomains,
+            disallowedRoutes: environment.tokenDisallowedRoutes
         }
     }),
 
