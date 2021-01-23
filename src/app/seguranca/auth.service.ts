@@ -66,11 +66,13 @@ export class AuthService {
         return this.http.post(this.oauthTokenUrl, body, { headers, withCredentials: true })
             .toPromise()
             .then(response => {
+                console.log('Access token inválido... Obtendo um novo a partir do refresh token...', response);
                 this.armazenarToken(response['access_token']);
 
                 return Promise.resolve(null);
             })
             .catch(response => {
+                console.log('erro', response);
                 return Promise.resolve(null);
             });
     }
