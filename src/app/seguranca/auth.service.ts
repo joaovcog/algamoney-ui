@@ -100,6 +100,7 @@ export class AuthService {
     }
 
     private armazenarToken(token: string) {
+        console.log('token a ser decodificado', token);
         this.jwtPayload = this.jwtHelper.decodeToken(token);
         localStorage.setItem('token', token);
     }
