@@ -9,19 +9,19 @@ import { PessoasPesquisaComponent } from "./pessoas-pesquisa/pessoas-pesquisa.co
 
 const routes: Routes = [
     {
-        path: 'pessoas',
+        path: '',
         component: PessoasPesquisaComponent,
         canActivate: [AuthGuard],
         data: { roles: ['ROLE_PESQUISAR_PESSOA'] }
     },
     {
-        path: 'pessoas/nova',
+        path: 'nova',
         component: PessoasCadastroComponent,
         canActivate: [AuthGuard],
         data: { roles: ['ROLE_CADASTRAR_PESSOA'] }
     },
     {
-        path: 'pessoas/:codigo',
+        path: ':codigo',
         component: PessoasCadastroComponent,
         canActivate: [AuthGuard],
         data: { roles: ['ROLE_CADASTRAR_PESSOA'] }
