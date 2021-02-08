@@ -21,7 +21,6 @@ export class MoneyHttpInterceptor implements HttpInterceptor {
         }
 
         if (this.auth.isAccessTokenInvalido()) {
-            console.log('token inválido!');
             return this.doRequestRefreshToken(req, next);
         }
 
@@ -34,7 +33,7 @@ export class MoneyHttpInterceptor implements HttpInterceptor {
 
     private doRequestWithToken(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         const token = localStorage.getItem('token');
-        console.log('token', token);
+
         req = req.clone({
             setHeaders: {
                 Accept: `application/json`,
@@ -42,7 +41,7 @@ export class MoneyHttpInterceptor implements HttpInterceptor {
                 Authorization: `Bearer ${token}`
             }
         });
-        console.log('Token encontrado...');
+
         return next.handle(req);
     }
 

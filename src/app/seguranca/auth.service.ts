@@ -72,15 +72,12 @@ export class AuthService {
                 return Promise.resolve(null);
             })
             .catch(response => {
-                console.log('erro', response);
                 return Promise.resolve(null);
             });
     }
 
     isAccessTokenInvalido() {
         const token = localStorage.getItem('token');
-        console.log('token invalido', token);
-        console.log(this.jwtHelper.isTokenExpired(token));
 
         return !token || this.jwtHelper.isTokenExpired(token);
     }
@@ -100,7 +97,6 @@ export class AuthService {
     }
 
     private armazenarToken(token: string) {
-        console.log('token a ser decodificado', token);
         this.jwtPayload = this.jwtHelper.decodeToken(token);
         localStorage.setItem('token', token);
     }
