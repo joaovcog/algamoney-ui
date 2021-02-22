@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import parse from 'date-fns/parse';
@@ -18,7 +18,10 @@ export class DashboardService {
     }
 
     lancamentosPorCategoria(): Promise<Array<any>> {
-        return this.http.get<any>(`${this.lancamentosUrl}/estatisticas/categoria`)
+        let params = new HttpParams();
+        params = params.set('tipoLancamento', 'DESPESA');
+
+        return this.http.get<any>(`${this.lancamentosUrl}/estatisticas/categoria`, { params })
             .toPromise();
     }
 
