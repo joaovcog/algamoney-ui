@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RelatoriosService } from '../relatorios.service';
 
 @Component({
   selector: 'app-relatorio-lancamentos',
@@ -7,17 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RelatorioLancamentosComponent implements OnInit {
 
-    periodoInicio: Date;
-    periodoFim: Date;
+    dataInicial: Date;
+    dataFinal: Date;
 
-    constructor() { }
+    constructor(private relatorioService: RelatoriosService) { }
 
     ngOnInit(): void {
     }
 
     gerar() {
-        console.log(this.periodoInicio);
-        console.log(this.periodoFim);
+        this.relatorioService.relatorioLancamentosPorPessoa(this.dataInicial, this.dataFinal)
+            .then(relatorio => {
+                const url = window.URL.createObjectURL(relatorio);
+
+                window.open(url);
+            });
     }
 
 }
