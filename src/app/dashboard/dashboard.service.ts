@@ -17,9 +17,9 @@ export class DashboardService {
         this.lancamentosUrl = `${environment.apiUrl}/lancamentos`;
     }
 
-    lancamentosPorCategoria(): Promise<Array<any>> {
+    lancamentosPorCategoria(tipoLancamento: string): Promise<Array<any>> {
         let params = new HttpParams();
-        params = params.set('tipoLancamento', 'DESPESA');
+        params = params.set('tipoLancamento', tipoLancamento.toUpperCase());
 
         return this.http.get<any>(`${this.lancamentosUrl}/estatisticas/categoria`, { params })
             .toPromise();
