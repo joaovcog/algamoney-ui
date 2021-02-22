@@ -1,3 +1,4 @@
+import { DecimalPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { DashboardService } from '../dashboard.service';
 
@@ -13,7 +14,35 @@ export class DashboardComponent implements OnInit {
 
     lineChartData: any;
 
-    constructor(private dashboardService: DashboardService) { }
+    defaultChartOptions = {
+        tooltips: {
+            callbacks: {
+                label: (tooltipItem, data) => {
+                    const dataset = data.datasets[tooltipItem.datasetIndex];
+                    const valor = dataset.data[tooltipItem.index];
+                    const label = dataset.label ? (dataset.label + ': ') : '';
+
+                    return label + this.decimalPipe.transform(valor, '1.2-2');
+                }
+            }
+        }
+    };
+
+    pieChartOptions = this.defaultChartOptions;
+
+    lineChartOptions = {
+        tooltips: {
+            callbacks: {
+                ...this.defaultChartOptions.tooltips.callbacks,
+                title: (tooltipItem) => {
+                    return `Dia ${tooltipItem[0].label}`;
+                }
+            }
+        }
+    };
+
+    constructor(private dashboardService: DashboardService,
+            private decimalPipe: DecimalPipe) { }
 
     ngOnInit(): void {
         this.configurarGraficoPizza();
@@ -26,11 +55,11 @@ export class DashboardComponent implements OnInit {
                 this.pieChartDataDespesas = {
                     labels: dados.map(dado => dado.categoria.nome),
                     datasets: [
-                    {
-                        data: dados.map(dado => dado.total),
-                        backgroundColor: ['#FF9900', '#109618', '#990099', '#3B3EAC',
-                                            '#0099C6', '#DD4477', '#3366CC', '#DC3912']
-                    }
+                        {
+                            data: dados.map(dado => dado.total),
+                            backgroundColor: ['#FF9900', '#109618', '#990099', '#3B3EAC',
+                                                '#0099C6', '#DD4477', '#3366CC', '#DC3912']
+                        }
                     ]
                 };
             });
