@@ -93,14 +93,15 @@
                         </tr>
                     </ng-template>
 
-                    <ng-template pTemplate="body" let-contato>
+                    <ng-template pTemplate="body" let-contato let-rowIndex="rowIndex">
                         <tr>
                             <td>{{ contato.nome }}</td>
                             <td>{{ contato.email }}</td>
                             <td>{{ contato.telefone }}</td>
                             <td class="col-acoes-content">
                                 <button pButton class="p-button-rounded" icon="pi pi-pencil" type="button"
-                                    pTooltip="Editar" tooltipPosition="top"></button>
+                                    pTooltip="Editar" tooltipPosition="top"
+                                    (click)="prepararEdicaoContato(contato, rowIndex)"></button>
                                 <button pButton class="p-button-rounded" icon="pi pi-trash" type="button"
                                     pTooltip="Excluir" tooltipPosition="top"></button>
                             </td>
@@ -115,7 +116,7 @@
                 </p-table>
             </div>
 
-            <div class="p-col-12">
+            <div class="p-col-12" style="margin-bottom: 30px;">
                 <button pButton type="submit" label="Salvar" [disabled]="!cadPessoaForm.valid"></button>
                 <button pButton type="button" label="Novo" class="p-button-secondary"
                     (click)="nova(cadPessoaForm)"></button>
@@ -129,7 +130,7 @@
 
 <p-dialog header="Novo Contato" [(visible)]="exibindoDialogContato"
     modal="modal" *ngIf="contato">
-    <form autocomplete="off" #formContato="ngForm">
+    <form autocomplete="off" #formContato="ngForm" (ngSubmit)="confirmarContato(formContato)">
         <div class="p-col-12 p-fluid">
             <label>Nome</label>
             <input pInputText type="text" name="nomeContato"
@@ -152,7 +153,8 @@
         </div>
 
         <div class="p-col-12">
-            <button pButton type="submit" label="Confirmar" [disabled]="formContato.invalid"></button>
+            <button pButton type="submit" label="Confirmar"
+                [disabled]="formContato.invalid"></button>
         </div>
     </form>
 </p-dialog>
