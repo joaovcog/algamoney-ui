@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
-import { Pessoa } from 'src/app/core/model';
+import { Contato, Pessoa } from 'src/app/core/model';
 import { PessoaService } from '../pessoa.service';
 
 @Component({
@@ -17,6 +17,8 @@ import { PessoaService } from '../pessoa.service';
 export class PessoasCadastroComponent implements OnInit {
 
     pessoa = new Pessoa();
+    exibindoDialogContato = false;
+    contato: Contato;
 
     constructor(
         private pessoaService: PessoaService,
@@ -40,6 +42,11 @@ export class PessoasCadastroComponent implements OnInit {
 
             this.carregarPessoa(codPessoa);
         }
+    }
+
+    prepararNovoContato() {
+        this.exibindoDialogContato = true;
+        this.contato = new Contato();
     }
 
     get editando() {

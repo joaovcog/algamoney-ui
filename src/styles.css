@@ -106,3 +106,9 @@ body .ui-button:focus {
 form .p-button {
     margin-right: .30em !important;
 }
+
+.p-datatable .p-datatable-header {
+    text-align: center;
+    height: 30px;
+    line-height: 1px;
+}
