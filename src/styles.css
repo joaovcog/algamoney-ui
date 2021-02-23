@@ -108,7 +108,5 @@ form .p-button {
 }
 
 .p-datatable .p-datatable-header {
-    text-align: center;
-    height: 30px;
-    line-height: 1px;
+    padding: 0.5rem 0.8rem;
 }

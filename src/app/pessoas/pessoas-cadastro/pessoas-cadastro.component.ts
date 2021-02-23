@@ -17,9 +17,6 @@ import { PessoaService } from '../pessoa.service';
 export class PessoasCadastroComponent implements OnInit {
 
     pessoa = new Pessoa();
-    exibindoDialogContato = false;
-    contato: Contato;
-    contatoIndex: number;
 
     constructor(
         private pessoaService: PessoaService,
@@ -43,31 +40,6 @@ export class PessoasCadastroComponent implements OnInit {
 
             this.carregarPessoa(codPessoa);
         }
-    }
-
-    prepararNovoContato() {
-        this.exibindoDialogContato = true;
-        this.contato = new Contato();
-        this.contatoIndex = this.pessoa.contatos.length;
-    }
-
-    prepararEdicaoContato(contato: Contato, index: number) {
-        this.contato = this.clonarContato(contato);
-        this.exibindoDialogContato = true;
-        this.contatoIndex = index;
-    }
-
-    confirmarContato(form: FormControl) {
-        this.pessoa.contatos[this.contatoIndex] = this.clonarContato(this.contato);
-        //this.pessoa.contatos.push(this.clonarContato(this.contato));
-        this.exibindoDialogContato = false;
-
-        form.reset();
-    }
-
-    clonarContato(contato: Contato): Contato {
-        return new Contato(contato.codigo, contato.nome,
-                        contato.email, contato.telefone);
     }
 
     get editando() {
