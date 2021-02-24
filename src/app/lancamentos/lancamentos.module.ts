@@ -11,6 +11,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { DropdownModule } from 'primeng/dropdown';
 import { FileUploadModule } from 'primeng/fileupload';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { NgxCurrencyModule } from 'ngx-currency';
 
 import { LancamentosCadastroComponent } from './lancamentos-cadastro/lancamentos-cadastro.component';
@@ -40,6 +41,7 @@ import { LancamentosRoutingModule } from './lancamentos-routing.module';
     DropdownModule,
     NgxCurrencyModule,
     FileUploadModule,
+    ProgressSpinnerModule,
 
     SharedModule,
     LancamentosRoutingModule
