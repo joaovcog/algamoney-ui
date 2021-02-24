@@ -110,3 +110,8 @@ form .p-button {
 .p-datatable .p-datatable-header {
     padding: 0.5rem 0.8rem;
 }
+
+.p-button.p-button-danger.p-button-outlined.excluir-anexo {
+    height: 35px;
+    margin-left: 10px;
+}

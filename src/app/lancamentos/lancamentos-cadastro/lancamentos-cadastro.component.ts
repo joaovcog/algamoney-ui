@@ -81,6 +81,13 @@ export class LancamentosCadastroComponent implements OnInit {
         this.uploadEmAndamento = false;
     }
 
+    removerAnexo() {
+        this.formulario.patchValue({
+            anexo: null,
+            urlAnexo: null
+        });
+    }
+
     get nomeAnexo() {
         const nomeAnexo = this.formulario.get('anexo').value;
 

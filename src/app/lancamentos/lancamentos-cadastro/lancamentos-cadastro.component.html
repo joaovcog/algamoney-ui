@@ -82,12 +82,17 @@
             </div>
 
             <div class="p-col-12 p-fluid" *ngIf="formulario.get('anexo').value" dir="rtl">
+                <button pButton type="button" class="p-button-outlined p-button-danger excluir-anexo"
+                    icon="pi pi-times"
+                    pTooltip="Remover anexo" tooltipPosition="top"
+                    (click)="removerAnexo()"></button>
+
                 <a target="_blank" pTooltip="Baixar anexo" tooltipPosition="top"
                     [href]="formulario.get('urlAnexo').value">{{ nomeAnexo }}</a>
             </div>
 
             <div class="p-col-12">
-                <button pButton type="submit" label="Salvar" [disabled]="!formulario.valid"></button>
+                <button pButton type="submit" label="Salvar" [disabled]="!formulario.valid || uploadEmAndamento"></button>
                 <button pButton type="button" label="Novo" class="p-button-secondary"
                     (click)="novo()"></button>
                 <a routerLink="/lancamentos" style="line-height: 2.2em; margin-left: 5px">Voltar para a pesquisa</a>
