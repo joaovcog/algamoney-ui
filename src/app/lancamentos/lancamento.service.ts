@@ -32,6 +32,10 @@ export class LancamentoService {
             .toPromise();
     }
 
+    urlUploadAnexo(): string {
+        return `${this.lancamentosUrl}/anexo`;
+    }
+
     pesquisar(filtro: LancamentoFiltro): Promise<any> {
         let params = new HttpParams();
 

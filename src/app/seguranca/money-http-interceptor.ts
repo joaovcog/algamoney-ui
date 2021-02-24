@@ -20,6 +20,10 @@ export class MoneyHttpInterceptor implements HttpInterceptor {
             return next.handle(req);
         }
 
+        if (this.isRequestAnexo(req)) {
+            return this.doRequestAnexo(req, next);
+        }
+
         if (this.auth.isAccessTokenInvalido()) {
             return this.doRequestRefreshToken(req, next);
         }
@@ -29,6 +33,22 @@ export class MoneyHttpInterceptor implements HttpInterceptor {
 
     private isOauthRequest(req: HttpRequest<any>) {
         return req.url.includes('/oauth/token');
+    }
+
+    private isRequestAnexo(req: HttpRequest<any>) {
+        return req.url.includes('/lancamentos/anexo');
+    }
+
+    private doRequestAnexo(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+        const token = localStorage.getItem('token');
+
+        req = req.clone({
+            setHeaders: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+
+        return next.handle(req);
     }
 
     private doRequestWithToken(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {

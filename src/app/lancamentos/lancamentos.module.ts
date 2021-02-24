@@ -10,6 +10,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { CalendarModule } from 'primeng/calendar';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { DropdownModule } from 'primeng/dropdown';
+import { FileUploadModule } from 'primeng/fileupload';
 import { NgxCurrencyModule } from 'ngx-currency';
 
 import { LancamentosCadastroComponent } from './lancamentos-cadastro/lancamentos-cadastro.component';
@@ -38,6 +39,7 @@ import { LancamentosRoutingModule } from './lancamentos-routing.module';
     SelectButtonModule,
     DropdownModule,
     NgxCurrencyModule,
+    FileUploadModule,
 
     SharedModule,
     LancamentosRoutingModule
