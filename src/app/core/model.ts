@@ -1,13 +1,23 @@
 import { format } from "date-fns";
 
+export class Estado {
+    codigo: number;
+    nome: string;
+}
+
+export class Cidade {
+    codigo: number;
+    nome: string;
+    estado = new Estado();
+}
+
 export class Endereco {
     logradouro: string;
     numero: string;
     complemento: string;
     bairro: string;
     cep: string;
-    cidade: string;
-    estado: string;
+    cidade = new Cidade();
 }
 
 export class Contato {

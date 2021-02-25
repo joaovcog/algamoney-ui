@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
 import { CoreModule } from '../core/core.module';
-import { Pessoa } from '../core/model';
+import { Cidade, Estado, Pessoa } from '../core/model';
 
 export class PessoaFiltro {
     nome: string;
@@ -17,9 +17,13 @@ export class PessoaFiltro {
 export class PessoaService {
 
     pessoasUrl: string;
+    cidadesUrl: string;
+    estadosUrl: string;
 
     constructor(private http: HttpClient) {
         this.pessoasUrl = `${environment.apiUrl}/pessoas`;
+        this.estadosUrl = `${environment.apiUrl}/estados`;
+        this.cidadesUrl = `${environment.apiUrl}/cidades`;
     }
 
     adicionar(pessoa: Pessoa): Promise<Pessoa> {
@@ -79,5 +83,18 @@ export class PessoaService {
         return this.http.put(`${this.pessoasUrl}/${codigo}/ativo`, ativo, { headers })
             .toPromise()
             .then(() => null);
+    }
+
+    listarEstados(): Promise<Estado[]> {
+        return this.http.get<Estado[]>(this.estadosUrl)
+            .toPromise();
+    }
+
+    pesquisarCidades(codEstado): Promise<Cidade[]> {
+        let params = new HttpParams();
+        params = params.set('codEstado', codEstado);
+
+        return this.http.get<Cidade[]>(this.cidadesUrl, { params })
+            .toPromise();
     }
 }
