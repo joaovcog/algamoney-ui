@@ -17,6 +17,7 @@ import { PessoaService } from '../pessoa.service';
 export class PessoasCadastroComponent implements OnInit {
 
     pessoa = new Pessoa();
+    estados: any[];
 
     constructor(
         private pessoaService: PessoaService,
@@ -32,6 +33,8 @@ export class PessoasCadastroComponent implements OnInit {
 
         const codPessoa = this.route.snapshot.params['codigo'];
 
+        this.carregarEstados();
+
         if (codPessoa) {
             if (isNaN(codPessoa)) {
                 this.router.navigate(['/pessoas', 'nova']);
@@ -40,6 +43,14 @@ export class PessoasCadastroComponent implements OnInit {
 
             this.carregarPessoa(codPessoa);
         }
+    }
+
+    carregarEstados() {
+        this.pessoaService.listarEstados()
+            .then(retorno => {
+                this.estados = retorno.map(uf => ({ label: uf.nome, value: uf.codigo }));
+            })
+            .catch(erro => this.errorHandler.handle(erro));
     }
 
     get editando() {
