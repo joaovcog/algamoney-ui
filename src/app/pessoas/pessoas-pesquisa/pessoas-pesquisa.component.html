@@ -39,11 +39,11 @@
                         </td>
                         <td>
                             <span class="p-column-title">Cidade</span>
-                            {{pessoa.endereco == null ? '' : pessoa.endereco.cidade}}
+                            {{pessoa.endereco == null ? '' : pessoa.endereco.cidade?.nome}}
                         </td>
                         <td class="col-estado-content">
                             <span class="p-column-title">Estado</span>
-                            {{pessoa.endereco == null ? '' : pessoa.endereco.estado}}
+                            {{pessoa.endereco == null ? '' : pessoa.endereco.cidade?.estado.nome}}
                         </td>
                         <td class="col-status-content">
                             <span class="p-column-title">Valor</span>
